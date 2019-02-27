@@ -1,4 +1,4 @@
-(ns propellerhead-technical.db-import.preparation
+(ns propellerhead-technical.db-import.prepare
   "Functions for reading Marvel character edn files and preparing the data
   for insertion into the database"
   (:require [clojure.edn :as edn])
@@ -45,7 +45,9 @@
        (map :url)
        (first)))
 
-(defn transform-character [c]
+(defn transform-character
+  "Takes an api result character and extracts the relevant portions"
+  [c]
   (->> c
        ((juxt :name
               :description
@@ -61,15 +63,18 @@
                 :appearances
                 :detail-url
                 :thumbnail-path
-                :thumbnail-extension]
-               )))
+                :thumbnail-extension])))
 
-(defn all-characters []
+(defn all-characters
+  "All characters from all files transformed into simple maps of salient data"
+  []
   (->> (list-files)
        (mapcat get-characters)
        (map transform-character)))
 
-(defn notable-characters []
+(defn notable-characters
+  "Marvel characters with a description and at least 3 appearances"
+  []
   (->> (all-characters)
        (filter #(and (< 3 (:appearances %))
                      (not-empty (:description %))))
