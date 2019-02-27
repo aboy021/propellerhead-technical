@@ -16,3 +16,4 @@ profiles.clj
 *.iml
 /env/secrets.edn
 *.db
+.DS_Store
