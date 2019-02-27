@@ -26,8 +26,17 @@ To start a web server for the application, run:
 
     lein run 
 
-## Notes
+## Code Highlights
 
+### Marvel Character import
+
+`src/clj/propellerhead_technical/db_import/` contains one off code
+for retrieving characters from the Marvel, transforming the data, 
+and inserting it into the local database. This code is expected 
+to be run from a REPL on a one off basis so lacks error handling
+and logging.
+
+## General Notes
 
 generated using Luminus version "3.10.40"
 
