@@ -5,6 +5,7 @@
 
   :dependencies [[cheshire "5.8.1"]
                  [clojure.java-time "0.3.2"]
+                 [clj-http "3.9.1"]
                  [com.h2database/h2 "1.4.198"]
                  [compojure "1.6.1"]
                  [conman "0.8.3"]
