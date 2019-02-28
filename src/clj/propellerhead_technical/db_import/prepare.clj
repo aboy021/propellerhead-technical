@@ -1,7 +1,8 @@
 (ns propellerhead-technical.db-import.prepare
   "Functions for reading Marvel character edn files and preparing the data
   for insertion into the database"
-  (:require [clojure.edn :as edn])
+  (:require [clojure.edn :as edn]
+            [java-time :as jt])
   (:import (java.io File)))
 
 
@@ -45,6 +46,8 @@
        (map :url)
        (first)))
 
+;"prospective", "current" or "non-active".
+
 (defn transform-character
   "Takes an api result character and extracts the relevant portions"
   [c]
@@ -52,18 +55,24 @@
        ((juxt :name
               :description
               :id
+              #(-> (:modified %)
+                   (subs 0 19)
+                   (jt/local-date-time))
               #(get-in % [:comics :available])
               detail-url
               #(get-in % [:thumbnail :path])
               #(get-in % [:thumbnail :extension])
+              (fn [_] "prospective")
               ))
        (zipmap [:name
                 :description
                 :id
+                :date-created
                 :appearances
                 :detail-url
                 :thumbnail-path
-                :thumbnail-extension])))
+                :thumbnail-extension
+                :status])))
 
 (defn all-characters
   "All characters from all files transformed into simple maps of salient data"
@@ -79,3 +88,4 @@
        (filter #(and (< 3 (:appearances %))
                      (not-empty (:description %))))
        (sort-by :appearances)))
+

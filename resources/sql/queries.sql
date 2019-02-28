@@ -1,21 +1,42 @@
--- :name create-user! :! :n
--- :doc creates a new user record
-INSERT INTO users
-(id, first_name, last_name, email, pass)
-VALUES (:id, :first_name, :last_name, :email, :pass)
+-- :name create-customer! :! :n
+-- :doc creates a new customer record
+INSERT INTO customer
+(customer_id
+ ,name
+ ,description
+ ,appearances
+ ,detail_url
+ ,thumbnail_path
+ ,thumbnail_extension
+ ,date_created
+ ,status)
+VALUES (  :customer-id
+         ,:name
+         ,:description
+         ,:appearances
+         ,:detail-url
+         ,:thumbnail-path
+         ,:thumbnail-extension
+         ,:date-created
+         ,:status)
 
--- :name update-user! :! :n
--- :doc updates an existing user record
-UPDATE users
-SET first_name = :first_name, last_name = :last_name, email = :email
-WHERE id = :id
+-- :name get-customer :? :1
+-- :doc retrieves a customer record given the id
+SELECT *
+FROM customer
+WHERE customer_id = :customer-id
 
--- :name get-user :? :1
--- :doc retrieves a user record given the id
-SELECT * FROM users
-WHERE id = :id
+-- :name update-customer-status! :! :n
+-- :doc updates an existing customer record's status
+UPDATE customer
+SET status = :status
+    ,date_modified CURRENT_TIMESTAMP
+WHERE customer_id = :customer-id
 
--- :name delete-user! :! :n
--- :doc deletes a user record given the id
-DELETE FROM users
-WHERE id = :id
+-- :name customer-search :query :*
+-- :doc Retrieves customers based on a search string
+SELECT *
+FROM customer
+WHERE name like :query
+      or description like :query
+      or status like :query

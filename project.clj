@@ -3,7 +3,8 @@
   :description "Simple web app for the Propellerhead Techinical Test"
   :url "https://www.workingforpropellerhead.co.nz/"
 
-  :dependencies [[cheshire "5.8.1"]
+  :dependencies [[camel-snake-kebab "0.4.0"]
+                 [cheshire "5.8.1"]
                  [clojure.java-time "0.3.2"]
                  [clj-http "3.9.1"]
                  [com.h2database/h2 "1.4.198"]
@@ -42,7 +43,9 @@
   :target-path "target/%s/"
   :main ^:skip-aot propellerhead-technical.core
 
-  :plugins [[lein-immutant "2.1.0"]]
+  :plugins [[lein-immutant "2.1.0"]
+            [lein-ancient "0.6.15"] ]
+  :jvm-opts ["--illegal-access=deny"]
 
   :profiles
   {:uberjar {:omit-source true
