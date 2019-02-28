@@ -66,7 +66,7 @@
               ))
        (zipmap [:name
                 :description
-                :id
+                :customer-id
                 :date-created
                 :appearances
                 :detail-url

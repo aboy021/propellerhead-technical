@@ -17,7 +17,7 @@
    :thumbnail-path      "http://i.annihil.us/u/prod/marvel/i/mg/3/50/526548a343e4b",
    :thumbnail-extension "jpg",
    :status              "prospective",
-   :customer-id         1009610,
+   :customer-id         0,
    :detail-url          "http://marvel.com/comics/characters/1009610/spider-man"})
 
 (use-fixtures
@@ -35,7 +35,7 @@
     (jdbc/db-set-rollback-only! t-conn)
     (is (= 1 (db/create-customer! t-conn spiderman)))
     (is (= spiderman
-           (-> (db/get-customer t-conn {:customer-id 1009610})
+           (-> (db/get-customer t-conn {:customer-id 0})
                (dissoc :date-modified))))))
 
 
@@ -45,9 +45,10 @@
     (jdbc/db-set-rollback-only! t-conn)
     (is (= 1 (db/create-customer! t-conn spiderman)))
     (is (= spiderman
-           (-> (db/customer-search t-conn {:query "%Peter Parker%"})
+           (-> (db/customer-search t-conn {:query "Peter Parker"})
                (first)
                (dissoc :date-modified))))))
+
 
 
 ;Repl version of test-customer

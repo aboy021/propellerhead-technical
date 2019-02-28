@@ -10,7 +10,7 @@ INSERT INTO customer
  ,thumbnail_extension
  ,date_created
  ,status)
-VALUES (  :customer-id
+VALUES (:customer-id
          ,:name
          ,:description
          ,:appearances
@@ -19,6 +19,20 @@ VALUES (  :customer-id
          ,:thumbnail-extension
          ,:date-created
          ,:status)
+
+-- :name create-customers! :! :n
+-- :doc Insert multiple characters with :tuple* parameter type
+insert into customer
+(customer_id
+ ,name
+ ,description
+ ,appearances
+ ,detail_url
+ ,thumbnail_path
+ ,thumbnail_extension
+ ,date_created
+ ,status)
+values :tuple*:customers
 
 -- :name get-customer :? :1
 -- :doc retrieves a customer record given the id
@@ -37,6 +51,7 @@ WHERE customer_id = :customer-id
 -- :doc Retrieves customers based on a search string
 SELECT *
 FROM customer
-WHERE name like :query
-      or description like :query
-      or status like :query
+WHERE name like '%' || :query || '%'
+      or description like '%' || :query || '%'
+      or status like '%' || :query || '%'
+ORDER BY appearances DESC

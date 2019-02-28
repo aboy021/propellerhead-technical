@@ -1,7 +1,7 @@
 CREATE TABLE customer
 (customer_id int PRIMARY KEY,
- name VARCHAR(64),
- description VARCHAR(1000),
+ name VARCHAR_IGNORECASE(64),
+ description VARCHAR_IGNORECASE(1000),
  appearances int,
  detail_url VARCHAR(256),
  thumbnail_path VARCHAR(64),
