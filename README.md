@@ -36,6 +36,36 @@ and inserting it into the local database. This code is expected
 to be run from a REPL on a one off basis so lacks error handling
 and logging.
 
+## Nice to Haves
+
+Some things that would be nice to have that I didn't implement.
+
+### Status Normalised
+
+I've stored status as a string, but I would prefer the DB to be better
+normalised and to store a status_id and have a status table with 
+status_id and description.
+
+### Full Text Indexing
+
+Use Lucene to index all the character descriptions. 
+Would have allowed for better search, though would have to be maintained.
+[Clucy](https://github.com/weavejester/clucy) is the library 
+I would have used.
+
+### AJAX
+
+Making the pages a little bit more responsive buy using ajax queries
+from client side javascript would have been good. A REST api with a 
+swagger front end, combined with clojure spec definitions for the 
+entities involved would have been nice.
+
+### SPA
+
+A Single Page Application using React, Re-Frame, and ClojureScript 
+would have been pretty great. I decided against it due to the 
+complexity and time.
+
 ## General Notes
 
 generated using Luminus version "3.10.40"
