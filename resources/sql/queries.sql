@@ -55,3 +55,10 @@ WHERE name like '%' || :query || '%'
       or description like '%' || :query || '%'
       or status like '%' || :query || '%'
 ORDER BY appearances DESC
+
+-- :name all-customers :query :*
+-- :doc Retrieves all customers.
+--      Generally a bad idea but there's little data here
+SELECT *
+FROM customer
+ORDER BY appearances DESC

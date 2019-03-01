@@ -1,8 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
+<style type="text/css">
+  figure:hover {background-color: #DDD;}
+</style>
 <div class="row">
   <div class="col-sm-12">
-    <!--{{docs|markdown}}-->
+
+    {% for customer in customers %}
+    <figure class="figure">
+      <a href="customer/{{customer.customer-id}}/" class="text-decoration-none">
+        <!--<figcaption class="figure-caption">{{customer.appearances}}</figcaption>-->
+        <img src="{{customer.thumbnail-path}}/standard_amazing.{{customer.thumbnail-extension}}"
+             class="figure-img img-fluid rounded"
+             alt="{{customer.name}}">
+        <figcaption class="figure-caption .text-truncate">{{customer.name}}</figcaption>
+      </a>
+    </figure>
+    {% endfor %}
+
   </div>
 </div>
 {% endblock %}

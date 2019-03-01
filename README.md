@@ -40,6 +40,11 @@ and logging.
 
 Some things that would be nice to have that I didn't implement.
 
+### Database Not in Git
+
+I've stored the dev database in git. It's small, so it's 
+not that big of a deal, but it's not best practice. 
+
 ### Status Normalised
 
 I've stored status as a string, but I would prefer the DB to be better
