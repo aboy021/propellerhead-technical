@@ -8,26 +8,16 @@
 
 (defn navigation [page-num num-pages]
   (let [at-start (<= page-num 1)
-        at-end (>= page-num num-pages)
-        previous (dec page-num)
-        start (max previous 1)
-        num-steps 3
-        pages (->> (range start (inc num-pages))
-                   (take-while #(<= % num-pages))
-                   (take num-steps)
-                   (vec))]
+        at-end (>= page-num num-pages)]
     (cond at-start {:previous -1
                     :current  page-num
-                    :next     2
-                    :pages    pages}
+                    :next     2}
           at-end {:previous (dec num-pages)
                   :current  page-num
-                  :next     -1
-                  :pages    pages}
+                  :next     -1}
           :else {:previous (dec page-num)
                  :current  page-num
-                 :next     (inc page-num)
-                 :pages    pages})))
+                 :next     (inc page-num)})))
 
 (defn home-page [request]
   (let [page-index (-> request
@@ -43,7 +33,7 @@
                       (count)
                       (/ page-size)
                       (int))
-        page-num (inc page-index)
+        page-num page-index
         nav (navigation page-num num-pages)]
     (clojure.pprint/pprint nav)
     (layout/render request "home.html"
