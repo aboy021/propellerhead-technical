@@ -44,7 +44,7 @@ WHERE customer_id = :customer-id
 -- :doc updates an existing customer record's status
 UPDATE customer
 SET status = :status
-    ,date_modified CURRENT_TIMESTAMP
+    ,date_modified = CURRENT_TIMESTAMP
 WHERE customer_id = :customer-id
 
 -- :name customer-search :query :*

@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card" style="width: 500px;">
+    <div class="card-body">
+        <h5 class="card-title">{{customer.name}}</h5>
+    </div>
+    <img class="card-img-top"
+         src="{{customer.thumbnail-path}}/detail.{{customer.thumbnail-extension}}"
+         alt="{{customer.name}}">
+    <div class="card-body">
+        <p class="card-text">{{customer.description}}</p>
+        <!--<p class="card-text"><small class="text-muted">{{customer.appearances}}</small></p>-->
+        <p class="card-text"><small class="text-muted"><a href="{{customer.detail-url}}">More on
+            Marvel.com</a></small></p>
+    </div>
+
+    <form action="/customer/{{customer.customer-id}}/"
+          method="post"
+          role="form">
+
+        <div class="form-group col-auto">
+            <div class="form-check">
+                <input class="form-check-input"
+                       type="radio"
+                       name="statusRadios"
+                       id="statusRadios1"
+                       value="prospective"
+                       {% ifequal customer.status "prospective" %} checked{%endifequal%}>
+                <label class="form-check-label" for="statusRadios1">
+                    Prospective
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input"
+                       type="radio"
+                       name="statusRadios"
+                       id="statusRadios2"
+                       value="current"
+                       {% ifequal customer.status "current" %} checked{%endifequal%}>
+                <label class="form-check-label" for="statusRadios2">
+                    Current
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input"
+                       type="radio"
+                       name="statusRadios"
+                       id="statusRadios3"
+                       value="non-active"
+                       {% ifequal customer.status "non-active" %} checked{%endifequal%}>
+                <label class="form-check-label" for="statusRadios3">
+                    Non-active
+                </label>
+            </div>
+
+        </div>
+
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <span>Note 1</span>
+                <button type="submit"
+                        class="close"
+                        aria-label="Close"
+                        name="toggleNote"
+                        value="1">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </li>
+            <li class="list-group-item">
+                <span>Note 2</span>
+                <button type="submit"
+                        class="close"
+                        aria-label="Close"
+                        name="toggleNote"
+                        value="2">
+                    <span aria-hidden="true">&times;</span>
+                </button></li>
+            <li class="list-group-item">
+                <span>Note 3</span>
+                <button type="submit"
+                        class="close"
+                        aria-label="Close"
+                        name="toggleNote"
+                        value="3">
+                    <span aria-hidden="true">&times;</span>
+                </button></li>
+            <li class="list-group-item">
+
+                <label for="newNote" class="col-auto col-form-label">Additional notes</label>
+                <textarea class="form-control"
+                          id="newNote"
+                          name="newNote"
+                          rows="3"></textarea>
+            </li>
+        </ul>
+        <div class="card-body">
+            <button type="submit" class="btn btn-primary mb-2">Submit</button>
+        </div>
+        {{anti-forgery-token|safe}}
+    </form>
+</div>
+
+{% endblock %}

@@ -1,6 +1,7 @@
 (ns propellerhead-technical.handler
   (:require [propellerhead-technical.middleware :as middleware]
             [propellerhead-technical.layout :refer [error-page]]
+            [propellerhead-technical.routes.customer :refer [customer-routes]]
             [propellerhead-technical.routes.home :refer [home-routes]]
             [compojure.core :refer [routes wrap-routes]]
             [ring.util.http-response :as response]
@@ -17,6 +18,9 @@
   (middleware/wrap-base
     (routes
       (-> #'home-routes
+          (wrap-routes middleware/wrap-csrf)
+          (wrap-routes middleware/wrap-formats))
+      (-> #'customer-routes
           (wrap-routes middleware/wrap-csrf)
           (wrap-routes middleware/wrap-formats))
       (route/not-found
