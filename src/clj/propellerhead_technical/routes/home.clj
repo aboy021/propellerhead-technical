@@ -6,20 +6,52 @@
             [clojure.java.io :as io]
             [propellerhead-technical.util :as util]))
 
+(defn navigation [page-num num-pages]
+  (let [at-start (<= page-num 1)
+        at-end (>= page-num num-pages)
+        previous (dec page-num)
+        start (max previous 1)
+        num-steps 3
+        pages (->> (range start (inc num-pages))
+                   (take-while #(<= % num-pages))
+                   (take num-steps)
+                   (vec))]
+    (cond at-start {:previous -1
+                    :current  page-num
+                    :next     2
+                    :pages    pages}
+          at-end {:previous (dec num-pages)
+                  :current  page-num
+                  :next     -1
+                  :pages    pages}
+          :else {:previous (dec page-num)
+                 :current  page-num
+                 :next     (inc page-num)
+                 :pages    pages})))
+
 (defn home-page [request]
-  (let [page (-> request
-                 (get-in [:query-params "page"])
-                 (util/parse-int)
-                 (util/abs))
-        page-size 30
-        to-drop (-> page
+  (let [page-index (-> request
+                       (get-in [:query-params "page"])
+                       (util/parse-int)
+                       (util/abs))
+        page-size 12
+        to-drop (-> page-index
                     (dec)
-                    (* page-size))]
+                    (* page-size))
+        customers (db/all-customers)
+        num-pages (-> customers
+                      (count)
+                      (/ page-size)
+                      (int))
+        page-num (inc page-index)
+        nav (navigation page-num num-pages)]
+    (clojure.pprint/pprint nav)
     (layout/render request "home.html"
                    {:docs      (-> "docs/docs.md" io/resource slurp)
-                    :customers (->> (db/all-customers)
+                    :customers (->> customers
                                     (drop to-drop)
-                                    (take page-size))})))
+                                    (take page-size))
+                    :nav       (navigation page-num num-pages)})))
 
 (defn about-page [request]
   (layout/render request "about.html"))
