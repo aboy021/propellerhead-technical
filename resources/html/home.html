@@ -3,7 +3,73 @@
 <style type="text/css">
   figure:hover {background-color: #DDD;}
 
+
+
+
+
+
 </style>
+
+<div class="row">
+    <div class="col-sm-12">
+        <form class="form"
+              action="/"
+              method="get">
+            <div class="form-group">
+                <div class="form-group row">
+                    <label for="search"
+                           class="col-sm-2 col-form-label text-right">Search</label>
+                    <div class="col-sm-10">
+                        <input type="text"
+                               class="form-control"
+                               name="search"
+                               id="search" value="">
+                    </div>
+                </div>
+                <!--"prospective", "current" or "non-active".-->
+                <div class="form-group-row">
+                    <div class="form-check form-check-inline col-sm-2">&nbsp;
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio"
+                               name="status" id="status1"
+                               value="all"
+                               checked>
+                        <label class="form-check-label"
+                               for="status1">all</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio"
+                               name="status" id="status2"
+                               value="prospective">
+                        <label class="form-check-label"
+                               for="status2">prospective</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio"
+                               name="status" id="status3"
+                               value="current">
+                        <label class="form-check-label"
+                               for="status3">current</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio"
+                               name="status" id="status4"
+                               value="non-active">
+                        <label class="form-check-label"
+                               for="status4">non-active</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="form-check form-check-inline col-sm-2">&nbsp;
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">Search
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <div class="row">
     <div class="col-sm-12">
 
@@ -26,11 +92,13 @@
 
 <nav aria-label="...">
     <ul class="pagination">
-        <li class="page-item {% ifequal nav.previous "-1" %} disabled{%endifequal%}">
-            <a class="page-link" href="/?page={{nav.previous}}">Previous</a>
+        <li class="page-item {% ifequal nav.previous " -1
+        " %} disabled{%endifequal%}">
+        <a class="page-link" href="/?page={{nav.previous}}">Previous</a>
         </li>
-        <li class="page-item {% ifequal nav.next "-1" %} disabled{%endifequal%}">
-            <a class="page-link" href="/?page={{nav.next}}">Next</a>
+        <li class="page-item {% ifequal nav.next " -1
+        " %} disabled{%endifequal%}">
+        <a class="page-link" href="/?page={{nav.next}}">Next</a>
         </li>
     </ul>
 </nav>

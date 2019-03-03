@@ -35,7 +35,7 @@
                       (int))
         page-num page-index
         nav (navigation page-num num-pages)]
-    (clojure.pprint/pprint nav)
+    (clojure.pprint/pprint request)
     (layout/render request "home.html"
                    {:docs      (-> "docs/docs.md" io/resource slurp)
                     :customers (->> customers
