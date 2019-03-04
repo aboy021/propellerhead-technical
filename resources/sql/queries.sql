@@ -117,4 +117,5 @@ WHERE note_id = :note-id
 SELECT *
 FROM note
 where customer_id = :customer-id
+    and date_deleted is null
 ORDER BY date_created desc;

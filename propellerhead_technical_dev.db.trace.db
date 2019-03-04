@@ -451,3 +451,714 @@ WHERE name like ?
 	at nrepl.middleware.session$session_exec$main_loop__19914.invoke(session.clj:170)
 	at clojure.lang.AFn.run(AFn.java:22)
 	at java.base/java.lang.Thread.run(Thread.java:834)
+2019-03-03 05:37:13 jdbc[83]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE CUSTOMER
+SET STATUS = ?
+    ,DATE_MODIFIED CURRENT_TIMESTAMP[*]
+WHERE CUSTOMER_ID = ? "; expected "., ="; SQL statement:
+UPDATE customer
+SET status = ?
+    ,date_modified CURRENT_TIMESTAMP
+WHERE customer_id = ? [42001-198]
+2019-03-03 05:39:36 jdbc[83]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE CUSTOMER
+SET STATUS = ?
+    ,DATE_MODIFIED CURRENT_TIMESTAMP[*]
+WHERE CUSTOMER_ID = ? "; expected "., ="; SQL statement:
+UPDATE customer
+SET status = ?
+    ,date_modified CURRENT_TIMESTAMP
+WHERE customer_id = ? [42001-198]
+2019-03-03 05:40:02 jdbc[83]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "UPDATE CUSTOMER
+SET STATUS = ?
+    ,DATE_MODIFIED CURRENT_TIMESTAMP[*]
+WHERE CUSTOMER_ID = ? "; expected "., ="; SQL statement:
+UPDATE customer
+SET status = ?
+    ,date_modified CURRENT_TIMESTAMP
+WHERE customer_id = ? [42001-198]
+2019-03-04 12:09:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT *
+FROM CUSTOMER
+WHERE (SEARCH IS NULL
+    OR SEARCH = ''
+    OR (NAME LIKE '%' || ? || '%'
+        OR DESCRIPTION LIKE '%' || ? || '%'))
+    AND (STATUS IS NULL
+         OR STATUS = ''
+         OR STATUS = ?))[*]
+ORDER BY APPEARANCES DESC "; SQL statement:
+SELECT *
+FROM customer
+WHERE (search is null
+    or search = ''
+    or (name like '%' || ? || '%'
+        or description like '%' || ? || '%'))
+    and (status is null
+         or status = ''
+         or status = ?))
+ORDER BY appearances DESC [42000-198]
+2019-03-04 12:09:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT *
+FROM CUSTOMER
+WHERE (SEARCH IS NULL
+    OR SEARCH = ''
+    OR (NAME LIKE '%' || ? || '%'
+        OR DESCRIPTION LIKE '%' || ? || '%'))
+    AND (STATUS IS NULL
+         OR STATUS = ''
+         OR STATUS = ?))[*]
+ORDER BY APPEARANCES DESC "; SQL statement:
+SELECT *
+FROM customer
+WHERE (search is null
+    or search = ''
+    or (name like '%' || ? || '%'
+        or description like '%' || ? || '%'))
+    and (status is null
+         or status = ''
+         or status = ?))
+ORDER BY appearances DESC [42000-198]
+2019-03-04 12:11:22 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "SEARCH" not found; SQL statement:
+SELECT *
+FROM customer
+WHERE (search is null
+    or search = ''
+    or (name like '%' || ? || '%'
+        or description like '%' || ? || '%'))
+    and (status is null
+         or status = ''
+         or status = ?)
+ORDER BY appearances DESC [42122-198]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:451)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:427)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.expression.ExpressionColumn.getColumnException(ExpressionColumn.java:176)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:158)
+	at org.h2.expression.condition.Comparison.optimize(Comparison.java:205)
+	at org.h2.expression.condition.ConditionAndOr.optimize(ConditionAndOr.java:133)
+	at org.h2.expression.condition.ConditionAndOr.optimize(ConditionAndOr.java:133)
+	at org.h2.expression.condition.ConditionAndOr.optimize(ConditionAndOr.java:133)
+	at org.h2.command.dml.Select.prepare(Select.java:1259)
+	at org.h2.command.Parser.prepareCommand(Parser.java:690)
+	at org.h2.engine.Session.prepareLocal(Session.java:629)
+	at org.h2.engine.Session.prepareCommand(Session.java:567)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1247)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:77)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:304)
+	at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:311)
+	at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java)
+	at clojure.java.jdbc$prepare_statement.invokeStatic(jdbc.clj:644)
+	at clojure.java.jdbc$prepare_statement.invoke(jdbc.clj:591)
+	at clojure.java.jdbc$db_query_with_resultset_STAR_.invokeStatic(jdbc.clj:1061)
+	at clojure.java.jdbc$db_query_with_resultset_STAR_.invoke(jdbc.clj:1041)
+	at clojure.java.jdbc$query.invokeStatic(jdbc.clj:1131)
+	at clojure.java.jdbc$query.invoke(jdbc.clj:1093)
+	at clojure.java.jdbc$query.invokeStatic(jdbc.clj:1109)
+	at clojure.java.jdbc$query.invoke(jdbc.clj:1093)
+	at clojure.lang.AFn.applyToHelper(AFn.java:156)
+	at clojure.lang.AFn.applyTo(AFn.java:144)
+	at clojure.core$apply.invokeStatic(core.clj:669)
+	at clojure.core$apply.invoke(core.clj:660)
+	at hugsql.adapter.clojure_java_jdbc.HugsqlAdapterClojureJavaJdbc.query(clojure_java_jdbc.clj:15)
+	at hugsql.adapter$eval13239$fn__13302$G__13221__13307.invoke(adapter.clj:3)
+	at hugsql.adapter$eval13239$fn__13302$G__13220__13313.invoke(adapter.clj:3)
+	at clojure.lang.Var.invoke(Var.java:399)
+	at hugsql.core$db_fn_STAR_$y__14117.doInvoke(core.clj:457)
+	at clojure.lang.RestFn.invoke(RestFn.java:445)
+	at hugsql.core$db_fn_STAR_$y__14117.invoke(core.clj:447)
+	at conman.core$try_query$fn__14205$fn__14206.invoke(core.clj:30)
+	at propellerhead_technical.db.core$eval30444$f__14233__auto____30471.invoke(core.clj:15)
+	at propellerhead_technical.test.db.core$eval30548.invokeStatic(form-init3136088967096377440.clj:1)
+	at propellerhead_technical.test.db.core$eval30548.invoke(form-init3136088967096377440.clj:1)
+	at clojure.lang.Compiler.eval(Compiler.java:7176)
+	at clojure.lang.Compiler.eval(Compiler.java:7131)
+	at clojure.core$eval.invokeStatic(core.clj:3214)
+	at clojure.core$eval.invoke(core.clj:3210)
+	at clojure.main$repl$read_eval_print__9068$fn__9071.invoke(main.clj:414)
+	at clojure.main$repl$read_eval_print__9068.invoke(main.clj:414)
+	at clojure.main$repl$fn__9077.invoke(main.clj:435)
+	at clojure.main$repl.invokeStatic(main.clj:435)
+	at clojure.main$repl.doInvoke(main.clj:345)
+	at clojure.lang.RestFn.invoke(RestFn.java:1523)
+	at nrepl.middleware.interruptible_eval$evaluate.invokeStatic(interruptible_eval.clj:79)
+	at nrepl.middleware.interruptible_eval$evaluate.invoke(interruptible_eval.clj:55)
+	at nrepl.middleware.interruptible_eval$interruptible_eval$fn__19813$fn__19817.invoke(interruptible_eval.clj:142)
+	at clojure.lang.AFn.run(AFn.java:22)
+	at nrepl.middleware.session$session_exec$main_loop__19914$fn__19918.invoke(session.clj:171)
+	at nrepl.middleware.session$session_exec$main_loop__19914.invoke(session.clj:170)
+	at clojure.lang.AFn.run(AFn.java:22)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+2019-03-05 05:34:25 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT *
+FROM CUSTOMER
+ORDER BY APPEARANCES ?[*] "; SQL statement:
+SELECT *
+FROM customer
+ORDER BY appearances ? [42000-198]
+2019-03-05 05:40:05 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT *
+FROM CUSTOMER
+ORDER BY
+    CASE @ORDERING
+    WHEN -1 THEN APPEARANCES DESC[*]
+    ELSE APPEARANCES ASC
+    END; "; expected "., (, [, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, ILIKE, REGEXP, IS, IN, BETWEEN, AND, OR, WHEN, ELSE, END"; SQL statement:
+SELECT *
+FROM customer
+ORDER BY
+    CASE @ordering
+    WHEN -1 THEN appearances desc
+    else appearances asc
+    END; [42001-198]
+2019-03-05 05:40:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT *
+FROM CUSTOMER
+ORDER BY
+    CASE @ORDERING
+    WHEN -1 THEN APPEARANCES DESC[*]
+    ELSE APPEARANCES ASC
+    END; "; expected "., (, [, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, ILIKE, REGEXP, IS, IN, BETWEEN, AND, OR, WHEN, ELSE, END"; SQL statement:
+SELECT *
+FROM customer
+ORDER BY
+    CASE @ordering
+    WHEN -1 THEN appearances desc
+    else appearances asc
+    END; [42001-198]
+2019-03-05 05:40:15 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT *
+FROM CUSTOMER
+ORDER BY
+    CASE @ORDERING
+    WHEN -1 THEN APPEARANCES DESC[*]
+    ELSE APPEARANCES ASC
+    END; "; expected "., (, [, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, ILIKE, REGEXP, IS, IN, BETWEEN, AND, OR, WHEN, ELSE, END"; SQL statement:
+SELECT *
+FROM customer
+ORDER BY
+    CASE @ordering
+    WHEN -1 THEN appearances desc
+    else appearances asc
+    END; [42001-198]
+2019-03-05 05:43:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT *
+FROM CUSTOMER
+ORDER BY
+    CASE @ORDERING
+    WHEN -1 THEN APPEARANCES DESC[*]
+    ELSE APPEARANCES ASC
+    END; "; expected "., (, [, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, ILIKE, REGEXP, IS, IN, BETWEEN, AND, OR, WHEN, ELSE, END"; SQL statement:
+SELECT *
+FROM customer
+ORDER BY
+    CASE @ordering
+    WHEN -1 THEN appearances desc
+    else appearances asc
+    END; [42001-198]
+2019-03-05 05:43:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT *
+FROM CUSTOMER
+ORDER BY
+    CASE @ORDERING
+    WHEN -1 THEN APPEARANCES DESC[*]
+    ELSE APPEARANCES ASC
+    END; "; expected "., (, [, ::, *, /, %, +, -, ||, ~, !~, NOT, LIKE, ILIKE, REGEXP, IS, IN, BETWEEN, AND, OR, WHEN, ELSE, END"; SQL statement:
+SELECT *
+FROM customer
+ORDER BY
+    CASE @ordering
+    WHEN -1 THEN appearances desc
+    else appearances asc
+    END; [42001-198]
+2019-03-05 05:43:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column  not found; SQL statement:
+SELECT *
+FROM customer
+ORDER BY
+    CASE ?
+    WHEN 1 THEN appearances
+    else ""
+    END asc
+    ,CASE ?
+    WHEN 1 THEN ""
+    else appearances
+    END desc; [42122-198]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:451)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:427)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.expression.ExpressionColumn.getColumnException(ExpressionColumn.java:176)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:158)
+	at org.h2.expression.function.Function.optimize(Function.java:2310)
+	at org.h2.command.dml.Select.prepare(Select.java:1256)
+	at org.h2.command.Parser.prepareCommand(Parser.java:690)
+	at org.h2.engine.Session.prepareLocal(Session.java:629)
+	at org.h2.engine.Session.prepareCommand(Session.java:567)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1247)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:77)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:304)
+	at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:311)
+	at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java)
+	at clojure.java.jdbc$prepare_statement.invokeStatic(jdbc.clj:644)
+	at clojure.java.jdbc$prepare_statement.invoke(jdbc.clj:591)
+	at clojure.java.jdbc$db_query_with_resultset_STAR_.invokeStatic(jdbc.clj:1061)
+	at clojure.java.jdbc$db_query_with_resultset_STAR_.invoke(jdbc.clj:1041)
+	at clojure.java.jdbc$query.invokeStatic(jdbc.clj:1131)
+	at clojure.java.jdbc$query.invoke(jdbc.clj:1093)
+	at clojure.java.jdbc$query.invokeStatic(jdbc.clj:1109)
+	at clojure.java.jdbc$query.invoke(jdbc.clj:1093)
+	at clojure.lang.AFn.applyToHelper(AFn.java:156)
+	at clojure.lang.AFn.applyTo(AFn.java:144)
+	at clojure.core$apply.invokeStatic(core.clj:669)
+	at clojure.core$apply.invoke(core.clj:660)
+	at hugsql.adapter.clojure_java_jdbc.HugsqlAdapterClojureJavaJdbc.query(clojure_java_jdbc.clj:15)
+	at hugsql.adapter$eval15222$fn__15285$G__15204__15290.invoke(adapter.clj:3)
+	at hugsql.adapter$eval15222$fn__15285$G__15203__15296.invoke(adapter.clj:3)
+	at clojure.lang.Var.invoke(Var.java:399)
+	at hugsql.core$db_fn_STAR_$y__16100.doInvoke(core.clj:457)
+	at clojure.lang.RestFn.invoke(RestFn.java:445)
+	at hugsql.core$db_fn_STAR_$y__16100.invoke(core.clj:447)
+	at conman.core$try_query$fn__16188$fn__16189.invoke(core.clj:30)
+	at propellerhead_technical.db.core$eval22415$f__16216__auto____22442.invoke(core.clj:15)
+	at propellerhead_technical.db.core$eval22519.invokeStatic(form-init919637701387081738.clj:1)
+	at propellerhead_technical.db.core$eval22519.invoke(form-init919637701387081738.clj:1)
+	at clojure.lang.Compiler.eval(Compiler.java:7176)
+	at clojure.lang.Compiler.eval(Compiler.java:7131)
+	at clojure.core$eval.invokeStatic(core.clj:3214)
+	at clojure.core$eval.invoke(core.clj:3210)
+	at clojure.main$repl$read_eval_print__9068$fn__9071.invoke(main.clj:414)
+	at clojure.main$repl$read_eval_print__9068.invoke(main.clj:414)
+	at clojure.main$repl$fn__9077.invoke(main.clj:435)
+	at clojure.main$repl.invokeStatic(main.clj:435)
+	at clojure.main$repl.doInvoke(main.clj:345)
+	at clojure.lang.RestFn.invoke(RestFn.java:1523)
+	at nrepl.middleware.interruptible_eval$evaluate.invokeStatic(interruptible_eval.clj:79)
+	at nrepl.middleware.interruptible_eval$evaluate.invoke(interruptible_eval.clj:55)
+	at nrepl.middleware.interruptible_eval$interruptible_eval$fn__19850$fn__19854.invoke(interruptible_eval.clj:142)
+	at clojure.lang.AFn.run(AFn.java:22)
+	at nrepl.middleware.session$session_exec$main_loop__19951$fn__19955.invoke(session.clj:171)
+	at nrepl.middleware.session$session_exec$main_loop__19951.invoke(session.clj:170)
+	at clojure.lang.AFn.run(AFn.java:22)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+2019-03-05 05:44:22 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column  not found; SQL statement:
+SELECT *
+FROM customer
+ORDER BY
+    (CASE ?
+    WHEN 1 THEN appearances
+    else ""
+    END) asc
+    ,(CASE ?
+    WHEN 1 THEN ""
+    else appearances
+    END) desc; [42122-198]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:451)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:427)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.expression.ExpressionColumn.getColumnException(ExpressionColumn.java:176)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:158)
+	at org.h2.expression.function.Function.optimize(Function.java:2310)
+	at org.h2.command.dml.Select.prepare(Select.java:1256)
+	at org.h2.command.Parser.prepareCommand(Parser.java:690)
+	at org.h2.engine.Session.prepareLocal(Session.java:629)
+	at org.h2.engine.Session.prepareCommand(Session.java:567)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1247)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:77)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:304)
+	at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:311)
+	at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java)
+	at clojure.java.jdbc$prepare_statement.invokeStatic(jdbc.clj:644)
+	at clojure.java.jdbc$prepare_statement.invoke(jdbc.clj:591)
+	at clojure.java.jdbc$db_query_with_resultset_STAR_.invokeStatic(jdbc.clj:1061)
+	at clojure.java.jdbc$db_query_with_resultset_STAR_.invoke(jdbc.clj:1041)
+	at clojure.java.jdbc$query.invokeStatic(jdbc.clj:1131)
+	at clojure.java.jdbc$query.invoke(jdbc.clj:1093)
+	at clojure.java.jdbc$query.invokeStatic(jdbc.clj:1109)
+	at clojure.java.jdbc$query.invoke(jdbc.clj:1093)
+	at clojure.lang.AFn.applyToHelper(AFn.java:156)
+	at clojure.lang.AFn.applyTo(AFn.java:144)
+	at clojure.core$apply.invokeStatic(core.clj:669)
+	at clojure.core$apply.invoke(core.clj:660)
+	at hugsql.adapter.clojure_java_jdbc.HugsqlAdapterClojureJavaJdbc.query(clojure_java_jdbc.clj:15)
+	at hugsql.adapter$eval15222$fn__15285$G__15204__15290.invoke(adapter.clj:3)
+	at hugsql.adapter$eval15222$fn__15285$G__15203__15296.invoke(adapter.clj:3)
+	at clojure.lang.Var.invoke(Var.java:399)
+	at hugsql.core$db_fn_STAR_$y__16100.doInvoke(core.clj:457)
+	at clojure.lang.RestFn.invoke(RestFn.java:445)
+	at hugsql.core$db_fn_STAR_$y__16100.invoke(core.clj:447)
+	at conman.core$try_query$fn__16188$fn__16189.invoke(core.clj:30)
+	at propellerhead_technical.db.core$eval22547$f__16216__auto____22574.invoke(core.clj:15)
+	at propellerhead_technical.db.core$eval22651.invokeStatic(form-init919637701387081738.clj:1)
+	at propellerhead_technical.db.core$eval22651.invoke(form-init919637701387081738.clj:1)
+	at clojure.lang.Compiler.eval(Compiler.java:7176)
+	at clojure.lang.Compiler.eval(Compiler.java:7131)
+	at clojure.core$eval.invokeStatic(core.clj:3214)
+	at clojure.core$eval.invoke(core.clj:3210)
+	at clojure.main$repl$read_eval_print__9068$fn__9071.invoke(main.clj:414)
+	at clojure.main$repl$read_eval_print__9068.invoke(main.clj:414)
+	at clojure.main$repl$fn__9077.invoke(main.clj:435)
+	at clojure.main$repl.invokeStatic(main.clj:435)
+	at clojure.main$repl.doInvoke(main.clj:345)
+	at clojure.lang.RestFn.invoke(RestFn.java:1523)
+	at nrepl.middleware.interruptible_eval$evaluate.invokeStatic(interruptible_eval.clj:79)
+	at nrepl.middleware.interruptible_eval$evaluate.invoke(interruptible_eval.clj:55)
+	at nrepl.middleware.interruptible_eval$interruptible_eval$fn__19850$fn__19854.invoke(interruptible_eval.clj:142)
+	at clojure.lang.AFn.run(AFn.java:22)
+	at nrepl.middleware.session$session_exec$main_loop__19951$fn__19955.invoke(session.clj:171)
+	at nrepl.middleware.session$session_exec$main_loop__19951.invoke(session.clj:170)
+	at clojure.lang.AFn.run(AFn.java:22)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+2019-03-05 05:44:52 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column  not found; SQL statement:
+SELECT *
+FROM customer
+ORDER BY
+    (CASE ?
+    WHEN 1 THEN appearances
+    else ""
+    END) asc
+    ,(CASE ?
+    WHEN 1 THEN ""
+    else appearances
+    END) desc; [42122-198]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:451)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:427)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.expression.ExpressionColumn.getColumnException(ExpressionColumn.java:176)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:158)
+	at org.h2.expression.function.Function.optimize(Function.java:2310)
+	at org.h2.command.dml.Select.prepare(Select.java:1256)
+	at org.h2.command.Parser.prepareCommand(Parser.java:690)
+	at org.h2.engine.Session.prepareLocal(Session.java:629)
+	at org.h2.engine.Session.prepareCommand(Session.java:567)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1247)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:77)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:304)
+	at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:311)
+	at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java)
+	at clojure.java.jdbc$prepare_statement.invokeStatic(jdbc.clj:644)
+	at clojure.java.jdbc$prepare_statement.invoke(jdbc.clj:591)
+	at clojure.java.jdbc$db_query_with_resultset_STAR_.invokeStatic(jdbc.clj:1061)
+	at clojure.java.jdbc$db_query_with_resultset_STAR_.invoke(jdbc.clj:1041)
+	at clojure.java.jdbc$query.invokeStatic(jdbc.clj:1131)
+	at clojure.java.jdbc$query.invoke(jdbc.clj:1093)
+	at clojure.java.jdbc$query.invokeStatic(jdbc.clj:1109)
+	at clojure.java.jdbc$query.invoke(jdbc.clj:1093)
+	at clojure.lang.AFn.applyToHelper(AFn.java:156)
+	at clojure.lang.AFn.applyTo(AFn.java:144)
+	at clojure.core$apply.invokeStatic(core.clj:669)
+	at clojure.core$apply.invoke(core.clj:660)
+	at hugsql.adapter.clojure_java_jdbc.HugsqlAdapterClojureJavaJdbc.query(clojure_java_jdbc.clj:15)
+	at hugsql.adapter$eval15222$fn__15285$G__15204__15290.invoke(adapter.clj:3)
+	at hugsql.adapter$eval15222$fn__15285$G__15203__15296.invoke(adapter.clj:3)
+	at clojure.lang.Var.invoke(Var.java:399)
+	at hugsql.core$db_fn_STAR_$y__16100.doInvoke(core.clj:457)
+	at clojure.lang.RestFn.invoke(RestFn.java:445)
+	at hugsql.core$db_fn_STAR_$y__16100.invoke(core.clj:447)
+	at conman.core$try_query$fn__16188$fn__16189.invoke(core.clj:30)
+	at propellerhead_technical.db.core$eval22547$f__16216__auto____22574.invoke(core.clj:15)
+	at propellerhead_technical.db.core$eval22655.invokeStatic(form-init919637701387081738.clj:1)
+	at propellerhead_technical.db.core$eval22655.invoke(form-init919637701387081738.clj:1)
+	at clojure.lang.Compiler.eval(Compiler.java:7176)
+	at clojure.lang.Compiler.eval(Compiler.java:7131)
+	at clojure.core$eval.invokeStatic(core.clj:3214)
+	at clojure.core$eval.invoke(core.clj:3210)
+	at clojure.main$repl$read_eval_print__9068$fn__9071.invoke(main.clj:414)
+	at clojure.main$repl$read_eval_print__9068.invoke(main.clj:414)
+	at clojure.main$repl$fn__9077.invoke(main.clj:435)
+	at clojure.main$repl.invokeStatic(main.clj:435)
+	at clojure.main$repl.doInvoke(main.clj:345)
+	at clojure.lang.RestFn.invoke(RestFn.java:1523)
+	at nrepl.middleware.interruptible_eval$evaluate.invokeStatic(interruptible_eval.clj:79)
+	at nrepl.middleware.interruptible_eval$evaluate.invoke(interruptible_eval.clj:55)
+	at nrepl.middleware.interruptible_eval$interruptible_eval$fn__19850$fn__19854.invoke(interruptible_eval.clj:142)
+	at clojure.lang.AFn.run(AFn.java:22)
+	at nrepl.middleware.session$session_exec$main_loop__19951$fn__19955.invoke(session.clj:171)
+	at nrepl.middleware.session$session_exec$main_loop__19951.invoke(session.clj:170)
+	at clojure.lang.AFn.run(AFn.java:22)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+2019-03-05 05:45:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column  not found; SQL statement:
+SELECT *
+FROM customer
+ORDER BY
+    (CASE ?
+    WHEN 1 THEN ""
+    else "5"
+    END) desc; [42122-198]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:451)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:427)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.expression.ExpressionColumn.getColumnException(ExpressionColumn.java:176)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:158)
+	at org.h2.expression.function.Function.optimize(Function.java:2310)
+	at org.h2.command.dml.Select.prepare(Select.java:1256)
+	at org.h2.command.Parser.prepareCommand(Parser.java:690)
+	at org.h2.engine.Session.prepareLocal(Session.java:629)
+	at org.h2.engine.Session.prepareCommand(Session.java:567)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1247)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:77)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:304)
+	at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:311)
+	at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java)
+	at clojure.java.jdbc$prepare_statement.invokeStatic(jdbc.clj:644)
+	at clojure.java.jdbc$prepare_statement.invoke(jdbc.clj:591)
+	at clojure.java.jdbc$db_query_with_resultset_STAR_.invokeStatic(jdbc.clj:1061)
+	at clojure.java.jdbc$db_query_with_resultset_STAR_.invoke(jdbc.clj:1041)
+	at clojure.java.jdbc$query.invokeStatic(jdbc.clj:1131)
+	at clojure.java.jdbc$query.invoke(jdbc.clj:1093)
+	at clojure.java.jdbc$query.invokeStatic(jdbc.clj:1109)
+	at clojure.java.jdbc$query.invoke(jdbc.clj:1093)
+	at clojure.lang.AFn.applyToHelper(AFn.java:156)
+	at clojure.lang.AFn.applyTo(AFn.java:144)
+	at clojure.core$apply.invokeStatic(core.clj:669)
+	at clojure.core$apply.invoke(core.clj:660)
+	at hugsql.adapter.clojure_java_jdbc.HugsqlAdapterClojureJavaJdbc.query(clojure_java_jdbc.clj:15)
+	at hugsql.adapter$eval15222$fn__15285$G__15204__15290.invoke(adapter.clj:3)
+	at hugsql.adapter$eval15222$fn__15285$G__15203__15296.invoke(adapter.clj:3)
+	at clojure.lang.Var.invoke(Var.java:399)
+	at hugsql.core$db_fn_STAR_$y__16100.doInvoke(core.clj:457)
+	at clojure.lang.RestFn.invoke(RestFn.java:445)
+	at hugsql.core$db_fn_STAR_$y__16100.invoke(core.clj:447)
+	at conman.core$try_query$fn__16188$fn__16189.invoke(core.clj:30)
+	at propellerhead_technical.db.core$eval22683$f__16216__auto____22710.invoke(core.clj:15)
+	at propellerhead_technical.db.core$eval22787.invokeStatic(form-init919637701387081738.clj:1)
+	at propellerhead_technical.db.core$eval22787.invoke(form-init919637701387081738.clj:1)
+	at clojure.lang.Compiler.eval(Compiler.java:7176)
+	at clojure.lang.Compiler.eval(Compiler.java:7131)
+	at clojure.core$eval.invokeStatic(core.clj:3214)
+	at clojure.core$eval.invoke(core.clj:3210)
+	at clojure.main$repl$read_eval_print__9068$fn__9071.invoke(main.clj:414)
+	at clojure.main$repl$read_eval_print__9068.invoke(main.clj:414)
+	at clojure.main$repl$fn__9077.invoke(main.clj:435)
+	at clojure.main$repl.invokeStatic(main.clj:435)
+	at clojure.main$repl.doInvoke(main.clj:345)
+	at clojure.lang.RestFn.invoke(RestFn.java:1523)
+	at nrepl.middleware.interruptible_eval$evaluate.invokeStatic(interruptible_eval.clj:79)
+	at nrepl.middleware.interruptible_eval$evaluate.invoke(interruptible_eval.clj:55)
+	at nrepl.middleware.interruptible_eval$interruptible_eval$fn__19850$fn__19854.invoke(interruptible_eval.clj:142)
+	at clojure.lang.AFn.run(AFn.java:22)
+	at nrepl.middleware.session$session_exec$main_loop__19951$fn__19955.invoke(session.clj:171)
+	at nrepl.middleware.session$session_exec$main_loop__19951.invoke(session.clj:170)
+	at clojure.lang.AFn.run(AFn.java:22)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+2019-03-05 05:54:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT *
+FROM CUSTOMER
+ORDER BY (CASE ?
+            WHEN 1 THEN APPEARANCES * -1
+            ELSE APPEARANCES
+            END)
+   APPEARANCES[*] DESC; "; SQL statement:
+SELECT *
+FROM customer
+ORDER BY (CASE ?
+            WHEN 1 THEN appearances * -1
+            else appearances
+            END)
+   appearances desc; [42000-198]
+2019-03-05 05:54:48 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT *
+,(CASE ?
+             WHEN 1 THEN APPEARANCES * -1
+             ELSE APPEARANCES
+             END) AS [[*]APPEARANCES]
+FROM CUSTOMER
+ORDER BY
+   APPEARANCES DESC; "; expected "identifier"; SQL statement:
+SELECT *
+,(CASE ?
+             WHEN 1 THEN appearances * -1
+             else appearances
+             END) as [appearances]
+FROM customer
+ORDER BY
+   appearances desc; [42001-198]
+2019-03-05 05:55:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT *
+,(CASE ?
+             WHEN 1 THEN (APPEARANCES * -1)
+             ELSE APPEARANCES
+             END) AS [[*]APPEARANCES]
+FROM CUSTOMER
+ORDER BY
+   APPEARANCES DESC; "; expected "identifier"; SQL statement:
+SELECT *
+,(CASE ?
+             WHEN 1 THEN (appearances * -1)
+             else appearances
+             END) as [appearances]
+FROM customer
+ORDER BY
+   appearances desc; [42001-198]
+2019-03-05 05:55:59 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "desc"; SQL statement:
+SELECT *
+,(CASE ?
+             WHEN 1 THEN (appearances * -1)
+             else appearances
+             END) as appearances
+FROM customer
+ORDER BY
+   appearances desc; [22018-198]
+2019-03-05 05:56:05 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "desc" not found; SQL statement:
+SELECT *
+,(CASE ?
+             WHEN "desc" THEN (appearances * -1)
+             else appearances
+             END) as appearances
+FROM customer
+ORDER BY
+   appearances desc; [42122-198]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:451)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:427)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.expression.ExpressionColumn.getColumnException(ExpressionColumn.java:176)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:158)
+	at org.h2.expression.function.Function.optimize(Function.java:2310)
+	at org.h2.expression.Alias.optimize(Alias.java:52)
+	at org.h2.command.dml.Select.prepare(Select.java:1256)
+	at org.h2.command.Parser.prepareCommand(Parser.java:690)
+	at org.h2.engine.Session.prepareLocal(Session.java:629)
+	at org.h2.engine.Session.prepareCommand(Session.java:567)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1247)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:77)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:304)
+	at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:311)
+	at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java)
+	at clojure.java.jdbc$prepare_statement.invokeStatic(jdbc.clj:644)
+	at clojure.java.jdbc$prepare_statement.invoke(jdbc.clj:591)
+	at clojure.java.jdbc$db_query_with_resultset_STAR_.invokeStatic(jdbc.clj:1061)
+	at clojure.java.jdbc$db_query_with_resultset_STAR_.invoke(jdbc.clj:1041)
+	at clojure.java.jdbc$query.invokeStatic(jdbc.clj:1131)
+	at clojure.java.jdbc$query.invoke(jdbc.clj:1093)
+	at clojure.java.jdbc$query.invokeStatic(jdbc.clj:1109)
+	at clojure.java.jdbc$query.invoke(jdbc.clj:1093)
+	at clojure.lang.AFn.applyToHelper(AFn.java:156)
+	at clojure.lang.AFn.applyTo(AFn.java:144)
+	at clojure.core$apply.invokeStatic(core.clj:669)
+	at clojure.core$apply.invoke(core.clj:660)
+	at hugsql.adapter.clojure_java_jdbc.HugsqlAdapterClojureJavaJdbc.query(clojure_java_jdbc.clj:15)
+	at hugsql.adapter$eval15222$fn__15285$G__15204__15290.invoke(adapter.clj:3)
+	at hugsql.adapter$eval15222$fn__15285$G__15203__15296.invoke(adapter.clj:3)
+	at clojure.lang.Var.invoke(Var.java:399)
+	at hugsql.core$db_fn_STAR_$y__16100.doInvoke(core.clj:457)
+	at clojure.lang.RestFn.invoke(RestFn.java:445)
+	at hugsql.core$db_fn_STAR_$y__16100.invoke(core.clj:447)
+	at conman.core$try_query$fn__16188$fn__16189.invoke(core.clj:30)
+	at propellerhead_technical.db.core$eval23479$f__16216__auto____23506.invoke(core.clj:15)
+	at propellerhead_technical.db.core$eval23583.invokeStatic(form-init919637701387081738.clj:1)
+	at propellerhead_technical.db.core$eval23583.invoke(form-init919637701387081738.clj:1)
+	at clojure.lang.Compiler.eval(Compiler.java:7176)
+	at clojure.lang.Compiler.eval(Compiler.java:7131)
+	at clojure.core$eval.invokeStatic(core.clj:3214)
+	at clojure.core$eval.invoke(core.clj:3210)
+	at clojure.main$repl$read_eval_print__9068$fn__9071.invoke(main.clj:414)
+	at clojure.main$repl$read_eval_print__9068.invoke(main.clj:414)
+	at clojure.main$repl$fn__9077.invoke(main.clj:435)
+	at clojure.main$repl.invokeStatic(main.clj:435)
+	at clojure.main$repl.doInvoke(main.clj:345)
+	at clojure.lang.RestFn.invoke(RestFn.java:1523)
+	at nrepl.middleware.interruptible_eval$evaluate.invokeStatic(interruptible_eval.clj:79)
+	at nrepl.middleware.interruptible_eval$evaluate.invoke(interruptible_eval.clj:55)
+	at nrepl.middleware.interruptible_eval$interruptible_eval$fn__19850$fn__19854.invoke(interruptible_eval.clj:142)
+	at clojure.lang.AFn.run(AFn.java:22)
+	at nrepl.middleware.session$session_exec$main_loop__19951$fn__19955.invoke(session.clj:171)
+	at nrepl.middleware.session$session_exec$main_loop__19951.invoke(session.clj:170)
+	at clojure.lang.AFn.run(AFn.java:22)
+	at java.base/java.lang.Thread.run(Thread.java:834)
+2019-03-05 10:35:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "DELETED" not found; SQL statement:
+UPDATE note
+SET deleted = CURRENT_TIMESTAMP
+WHERE note_id = ? [42122-198]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:451)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:427)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.table.Table.getColumn(Table.java:728)
+	at org.h2.command.Parser.readTableColumn(Parser.java:1215)
+	at org.h2.command.Parser.parseUpdateSetClause(Parser.java:1253)
+	at org.h2.command.Parser.parseUpdate(Parser.java:1224)
+	at org.h2.command.Parser.parsePrepared(Parser.java:944)
+	at org.h2.command.Parser.parse(Parser.java:789)
+	at org.h2.command.Parser.parse(Parser.java:761)
+	at org.h2.command.Parser.prepareCommand(Parser.java:684)
+	at org.h2.engine.Session.prepareLocal(Session.java:629)
+	at org.h2.engine.Session.prepareCommand(Session.java:567)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1247)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:77)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:304)
+	at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:311)
+	at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java)
+	at clojure.java.jdbc$prepare_statement.invokeStatic(jdbc.clj:644)
+	at clojure.java.jdbc$prepare_statement.invoke(jdbc.clj:591)
+	at clojure.java.jdbc$db_do_prepared.invokeStatic(jdbc.clj:1027)
+	at clojure.java.jdbc$db_do_prepared.invoke(jdbc.clj:1008)
+	at clojure.java.jdbc$execute_BANG_$execute_helper__13841.invoke(jdbc.clj:1413)
+	at clojure.java.jdbc$execute_BANG_.invokeStatic(jdbc.clj:1415)
+	at clojure.java.jdbc$execute_BANG_.invoke(jdbc.clj:1384)
+	at clojure.java.jdbc$execute_BANG_.invokeStatic(jdbc.clj:1405)
+	at clojure.java.jdbc$execute_BANG_.invoke(jdbc.clj:1384)
+	at clojure.lang.AFn.applyToHelper(AFn.java:156)
+	at clojure.lang.AFn.applyTo(AFn.java:144)
+	at clojure.core$apply.invokeStatic(core.clj:669)
+	at clojure.core$apply.invoke(core.clj:660)
+	at hugsql.adapter.clojure_java_jdbc.HugsqlAdapterClojureJavaJdbc.execute(clojure_java_jdbc.clj:12)
+	at hugsql.adapter$eval15222$fn__15223$G__15202__15228.invoke(adapter.clj:3)
+	at hugsql.adapter$eval15222$fn__15223$G__15201__15234.invoke(adapter.clj:3)
+	at clojure.lang.Var.invoke(Var.java:399)
+	at hugsql.core$db_fn_STAR_$y__16100.doInvoke(core.clj:457)
+	at clojure.lang.RestFn.invoke(RestFn.java:445)
+	at hugsql.core$db_fn_STAR_$y__16100.invoke(core.clj:447)
+	at conman.core$try_query$fn__16188$fn__16189.invoke(core.clj:30)
+	at clojure.lang.AFn.applyToHelper(AFn.java:156)
+	at clojure.lang.RestFn.applyTo(RestFn.java:132)
+	at clojure.core$apply.invokeStatic(core.clj:669)
+	at clojure.core$apply.invoke(core.clj:660)
+	at propellerhead_technical.db.core$eval18879$f__16216__auto____18906.doInvoke(core.clj:15)
+	at clojure.lang.RestFn.invoke(RestFn.java:425)
+	at propellerhead_technical.test.db.core$fn__24377$fn__24378.invoke(core.clj:82)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:771)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:741)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:806)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:741)
+	at clojure.java.jdbc$db_transaction_STAR_.invokeStatic(jdbc.clj:754)
+	at clojure.java.jdbc$db_transaction_STAR_.invoke(jdbc.clj:741)
+	at propellerhead_technical.test.db.core$fn__24377.invokeStatic(core.clj:72)
+	at propellerhead_technical.test.db.core$fn__24377.invoke(core.clj:71)
+	at clojure.test$test_var$fn__9707.invoke(test.clj:717)
+	at clojure.test$test_var.invokeStatic(test.clj:717)
+	at clojure.test$test_var.invoke(test.clj:708)
+	at propellerhead_technical.test.db.core$test_delete_note.invokeStatic(core.clj:71)
+	at propellerhead_technical.test.db.core$test_delete_note.invoke(core.clj:71)
+	at propellerhead_technical.test.db.core$eval24403.invokeStatic(form-init5817450621351078192.clj:1)
+	at propellerhead_technical.test.db.core$eval24403.invoke(form-init5817450621351078192.clj:1)
+	at clojure.lang.Compiler.eval(Compiler.java:7176)
+	at clojure.lang.Compiler.eval(Compiler.java:7131)
+	at clojure.core$eval.invokeStatic(core.clj:3214)
+	at clojure.core$eval.invoke(core.clj:3210)
+	at clojure.main$repl$read_eval_print__9068$fn__9071.invoke(main.clj:414)
+	at clojure.main$repl$read_eval_print__9068.invoke(main.clj:414)
+	at clojure.main$repl$fn__9077.invoke(main.clj:435)
+	at clojure.main$repl.invokeStatic(main.clj:435)
+	at clojure.main$repl.doInvoke(main.clj:345)
+	at clojure.lang.RestFn.invoke(RestFn.java:1523)
+	at nrepl.middleware.interruptible_eval$evaluate.invokeStatic(interruptible_eval.clj:79)
+	at nrepl.middleware.interruptible_eval$evaluate.invoke(interruptible_eval.clj:55)
+	at nrepl.middleware.interruptible_eval$interruptible_eval$fn__19853$fn__19857.invoke(interruptible_eval.clj:142)
+	at clojure.lang.AFn.run(AFn.java:22)
+	at nrepl.middleware.session$session_exec$main_loop__19954$fn__19958.invoke(session.clj:171)
+	at nrepl.middleware.session$session_exec$main_loop__19954.invoke(session.clj:170)
+	at clojure.lang.AFn.run(AFn.java:22)
+	at java.base/java.lang.Thread.run(Thread.java:834)

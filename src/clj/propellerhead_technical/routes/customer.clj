@@ -6,28 +6,35 @@
             [ring.util.response :as resp]
             [ring.util.anti-forgery :refer [anti-forgery-field]]))
 
+(defn not-empty? [x] ((complement empty?) x))
+(defn not-zero? [x] ((complement zero?) x))
+
 (defn customer-page
   "Renders the customer details for the specified customer"
   [customer-id]
-  (let [id (util/parse-int customer-id)
-        anti-forgery-field (anti-forgery-field)]
+  (let [id (util/parse-int customer-id)]
     (layout/render {} "customer.html"
                    {:customer           (db/get-customer {:customer-id id})
-                    :notes (db/customer-notes {:customer-id id})
-                    :anti-forgery-token anti-forgery-field})))
+                    :notes              (db/customer-notes {:customer-id id})
+                    :anti-forgery-token  (anti-forgery-field)})))
 
 (defn update-customer!
   "Updates the customer and creates any new notes"
   [form]
   ;todo: validate
-  (clojure.pprint/pprint form)
+  ;(clojure.pprint/pprint form)
   (let [id (util/parse-int (:customer-id form))
+        toggle-note (util/parse-int (:toggle-note form))
         new-note (:new-note form)]
-    (db/update-customer-status! {:status      (:status-radios form)
-                                 :customer-id id})
-    (when ((complement empty?) new-note)
-      (db/create-note! {:customer-id id
-                       :body        new-note}))))
+    (do
+      ;(clojure.pprint/pprint toggle-note)
+      (db/update-customer-status! {:status      (:status-radios form)
+                                   :customer-id id})
+      (when (not-empty? new-note)
+        (db/create-note! {:customer-id id
+                          :body        new-note}))
+      (when (not-zero? toggle-note)
+        (db/delete-note! {:note-id toggle-note})))))
 
 (defroutes
   customer-routes
