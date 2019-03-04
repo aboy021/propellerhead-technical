@@ -23,7 +23,7 @@
                         <input type="text"
                                class="form-control"
                                name="search"
-                               id="search" value="">
+                               id="search" value="{{search}}">
                     </div>
                 </div>
                 <!--"prospective", "current" or "non-active".-->
@@ -34,28 +34,35 @@
                         <input class="form-check-input" type="radio"
                                name="status" id="status1"
                                value="all"
-                               checked>
+                               {% ifequal status
+                               "" %} checked{%endifequal%}>
                         <label class="form-check-label"
                                for="status1">all</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio"
                                name="status" id="status2"
-                               value="prospective">
+                               value="prospective"
+                               {% ifequal status
+                               "prospective" %} checked{%endifequal%}>
                         <label class="form-check-label"
                                for="status2">prospective</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio"
                                name="status" id="status3"
-                               value="current">
+                               value="current"
+                               {% ifequal status
+                               "current" %} checked{%endifequal%}>
                         <label class="form-check-label"
                                for="status3">current</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio"
                                name="status" id="status4"
-                               value="non-active">
+                               value="non-active"
+                               {% ifequal status
+                               "non-active" %} checked{%endifequal%}>
                         <label class="form-check-label"
                                for="status4">non-active</label>
                     </div>
@@ -92,13 +99,13 @@
 
 <nav aria-label="...">
     <ul class="pagination">
-        <li class="page-item {% ifequal nav.previous " -1
-        " %} disabled{%endifequal%}">
-        <a class="page-link" href="/?page={{nav.previous}}">Previous</a>
+        <li class="page-item {% ifequal nav.previous
+            "-1" %} disabled{%endifequal%}">
+        <a class="page-link" href="/?{{previous-query-string}}">Previous</a>
         </li>
-        <li class="page-item {% ifequal nav.next " -1
-        " %} disabled{%endifequal%}">
-        <a class="page-link" href="/?page={{nav.next}}">Next</a>
+        <li class="page-item {% ifequal nav.next
+            "-1" %} disabled{%endifequal%}">
+        <a class="page-link" href="/?{{next-query-string}}">Next</a>
         </li>
     </ul>
 </nav>

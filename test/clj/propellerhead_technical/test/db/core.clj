@@ -45,7 +45,8 @@
     (jdbc/db-set-rollback-only! t-conn)
     (is (= 1 (db/create-customer! t-conn spiderman)))
     (is (= spiderman
-           (-> (db/customer-search t-conn {:query "Peter Parker"})
+           (-> (db/customer-search t-conn {:search "Peter Parker"
+                                           :status nil})
                (first)
                (dissoc :date-modified))))))
 

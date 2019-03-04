@@ -51,10 +51,28 @@ WHERE customer_id = :customer-id
 -- :doc Retrieves customers based on a search string
 SELECT *
 FROM customer
-WHERE name like '%' || :query || '%'
-      or description like '%' || :query || '%'
-      or status like '%' || :query || '%'
+WHERE (:search is null
+    or :search = ''
+    or (name like '%' || :search || '%'
+        or description like '%' || :search || '%'))
+    and (:status is null
+         or :status = ''
+         or status = :status)
 ORDER BY appearances DESC
+LIMIT :limit OFFSET :offset
+
+
+-- :name customer-search-count :query :1
+-- :doc Retrieves customers based on a search string
+SELECT count(*) as freq
+FROM customer
+WHERE (:search is null
+    or :search = ''
+    or (name like '%' || :search || '%'
+        or description like '%' || :search || '%'))
+    and (:status is null
+         or :status = ''
+         or status = :status)
 
 -- :name all-customers :query :*
 -- :doc Retrieves all customers.
