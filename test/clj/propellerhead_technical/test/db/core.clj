@@ -55,36 +55,27 @@
                (dissoc :date-modified))))))
 
 
-
-;Repl version of test-customer
-;
-#_(let [c {:description         "Bitten by a radioactive spider, high school student Peter Parker gained the speed, strength and powers of a spider. Adopting the name Spider-Man, Peter hoped to start a career using his new abilities. Taught that with great power comes great responsibility, Spidey has vowed to use his powers to help people.",
-           :date-created        (-> "2019-02-06T18:06:19-0500"
-                                    (subs 0 19)
-                                    (jt/local-date-time)),
-           :appearances         3500,
-           :name                "Spider-Man",
-           :thumbnail-path      "http://i.annihil.us/u/prod/marvel/i/mg/3/50/526548a343e4b",
-           :thumbnail-extension "jpg",
-           :status              "prospective",
-           :customer-id         1009610,
-           :detail-url          "http://marvel.com/comics/characters/1009610/spider-man"}]
-    (jdbc/with-db-transaction
-      [t-conn *db*]
-      (jdbc/db-set-rollback-only! t-conn)
-      (db/create-customer! t-conn c)
-      (let [result (dissoc (db/get-customer t-conn {:customer-id 1009610})
-                           :date-modified)]
-        (-> (zipmap [:things-only-in-a :things-only-in-b :things-in-both] (clojure.data/diff c result))
-            (assoc :a c)
-            (assoc :b result)))))
-
-; repl version of test-customer-search
-;
-#_(jdbc/with-db-transaction
+(deftest test-create-note
+  (jdbc/with-db-transaction
     [t-conn *db*]
     (jdbc/db-set-rollback-only! t-conn)
-    (db/create-customer! t-conn spiderman)
-    (-> (db/customer-search t-conn {:query "%Peter Parker%"})
-        (first)
-        (dissoc :date-modified)))
+    (is (= 1 (db/create-customer! t-conn spiderman)))
+    (let [note {:customer-id 0
+                :body        "This is a test note"}]
+      (is (= 1 (db/create-note! t-conn note)))
+      (is (= note
+             (-> (db/customer-notes t-conn note)
+                 (first)
+                 (select-keys [:customer-id :body])))))))
+
+(deftest test-delete-note
+  (jdbc/with-db-transaction
+    [t-conn *db*]
+    (jdbc/db-set-rollback-only! t-conn)
+    (is (= 1 (db/create-customer! t-conn spiderman)))
+    (let [note {:customer-id 0
+                :body        "This is a test note"}]
+      (is (= 1 (db/create-note! t-conn note)))
+      (let [db-note (first (db/customer-notes t-conn note))]
+        ;(clojure.pprint/pprint db-note)
+        (is (= 1 (db/delete-note! t-conn (select-keys db-note [:note-id]))))))))

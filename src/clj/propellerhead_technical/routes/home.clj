@@ -56,6 +56,10 @@
         customers (db/customer-search query)
         num-customers (:freq (db/customer-search-count query))
         nav (navigation page-num num-customers)
+        previous-query-string (-> request
+                                  (:query-params)
+                                  (assoc :page (:next nav))
+                                  (ring.util.codec/form-encode))
         sorted-customers (->> customers
                               (sort-by :appearances)
                               ((fn [col] (if descending? (reverse col) col))))
@@ -73,15 +77,12 @@
                                                   (assoc :page (:next nav))
                                                   (ring.util.codec/form-encode))
 
-                       :previous-query-string (-> request
-                                                  (:query-params)
-                                                  (assoc :page (:next nav))
-                                                  (ring.util.codec/form-encode))
+                       :previous-query-string previous-query-string
                        :search                search
                        :status                status
-                       :descending?            descending?}]
-    (clojure.pprint/pprint (:query-params request))
-    (clojure.pprint/pprint render-params)
+                       :descending?           descending?}]
+    ;(clojure.pprint/pprint (:query-params request))
+    ;(clojure.pprint/pprint render-params)
     (layout/render request "home.html" render-params)))
 
 (defn about-page [request]

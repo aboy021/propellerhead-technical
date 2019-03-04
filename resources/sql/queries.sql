@@ -1,3 +1,7 @@
+---------------
+-- Customers --
+---------------
+
 -- :name create-customer! :! :n
 -- :doc creates a new customer record
 INSERT INTO customer
@@ -82,3 +86,35 @@ SELECT *
              END) as ordering
 FROM customer
 ORDER BY ordering asc;
+
+-----------
+-- Notes --
+-----------
+
+-- :name create-note! :! :n
+-- :doc creates a new note for the specified customer
+insert into note
+( body
+ ,customer_id
+ ,date_created
+ ,date_deleted)
+ values
+ ( :body
+  ,:customer-id
+  ,CURRENT_TIMESTAMP
+  ,null);
+
+
+-- :name delete-note! :! :n
+-- :doc marks a note as deleted
+UPDATE note
+SET date_deleted = CURRENT_TIMESTAMP
+WHERE note_id = :note-id
+
+
+-- :name customer-notes :query :*
+-- :doc Get's all of the notes for the specified customer that are not deleted
+SELECT *
+FROM note
+where customer_id = :customer-id
+ORDER BY date_created desc;

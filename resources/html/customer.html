@@ -58,35 +58,20 @@
         </div>
 
         <ul class="list-group list-group-flush">
+
+            {% for note in notes %}
             <li class="list-group-item">
                 <button type="submit"
                         class="close"
                         aria-label="Close"
                         name="toggleNote"
-                        value="1">
+                        value="{{note.note-id}}">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <span>Note 1</span>
+                <span>{{note.body}}</span>
             </li>
-            <li class="list-group-item">
-                <button type="submit"
-                        class="close"
-                        aria-label="Close"
-                        name="toggleNote"
-                        value="2">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <span>Note 2</span></li>
-            <li class="list-group-item">
-                <button type="submit"
-                        class="close"
-                        aria-label="Close"
-                        name="toggleNote"
-                        value="3">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <span>note 3</span>
-            </li>
+            {% endfor %}
+
             <li class="list-group-item">
 
                 <label for="newNote" class="col-auto col-form-label">Additional notes</label>
