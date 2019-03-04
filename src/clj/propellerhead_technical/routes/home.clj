@@ -50,17 +50,24 @@
         search (get-in request [:query-params "search"])
         status (request->status request)
         query {:search search
-               :status status
-               :limit  page-size
-               :offset (* (dec page-num) page-size)}
+               :status status}
+        offset (* (dec page-num) page-size)
         customers (db/customer-search query)
         num-customers (:freq (db/customer-search-count query))
-        nav (navigation page-num num-customers)]
+        nav (navigation page-num num-customers)
+        descending? true
+        sorted-customers (->> customers
+                              (sort-by :appearances)
+                              ((fn [col] (if descending? (reverse col) col))))
+        paged-customers (->> sorted-customers
+                             (drop offset)
+                             (take page-size)
+                             (vec))]
     (clojure.pprint/pprint (:query-params request))
-    (clojure.pprint/pprint query)
+    (clojure.pprint/pprint paged-customers)
     (layout/render request "home.html"
                    {:docs                  (-> "docs/docs.md" io/resource slurp)
-                    :customers             customers
+                    :customers             paged-customers
                     :nav                   nav
                     :next-query-string     (-> request
                                                (:query-params)

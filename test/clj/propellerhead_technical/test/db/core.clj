@@ -8,7 +8,7 @@
             [mount.core :as mount]))
 
 (def spiderman
-  {:description         "Bitten by a radioactive spider, high school student Peter Parker gained the speed, strength and powers of a spider. Adopting the name Spider-Man, Peter hoped to start a career using his new abilities. Taught that with great power comes great responsibility, Spidey has vowed to use his powers to help people.",
+  {:description         "ABC123 .Bitten by a radioactive spider, high school student Peter Parker gained the speed, strength and powers of a spider. Adopting the name Spider-Man, Peter hoped to start a career using his new abilities. Taught that with great power comes great responsibility, Spidey has vowed to use his powers to help people.",
    :date-created        (-> "2019-02-06T18:06:19-0500"
                             (subs 0 19)
                             (jt/local-date-time)),
@@ -16,9 +16,9 @@
    :name                "Spider-Man",
    :thumbnail-path      "http://i.annihil.us/u/prod/marvel/i/mg/3/50/526548a343e4b",
    :thumbnail-extension "jpg",
-   :status              "prospective",
+   :status              "current",
    :customer-id         0,
-   :detail-url          "http://marvel.com/comics/characters/1009610/spider-man"})
+   :detail-url          "http://marvel.com/comics/characters/1009610/spider-man?utm_campaign=apiRef&utm_source=7e8580151d73b9fa709851f6dd87ba51"})
 
 (use-fixtures
   :once
@@ -45,8 +45,12 @@
     (jdbc/db-set-rollback-only! t-conn)
     (is (= 1 (db/create-customer! t-conn spiderman)))
     (is (= spiderman
-           (-> (db/customer-search t-conn {:search "Peter Parker"
-                                           :status nil})
+           (-> (db/customer-search t-conn {:search "ABC123"
+                                           :status nil
+                                           ;:ordering "desc"
+                                           ;:offset 0
+                                           ;:limit 12
+                                           })
                (first)
                (dissoc :date-modified))))))
 

@@ -58,8 +58,6 @@ WHERE (:search is null
     and (:status is null
          or :status = ''
          or status = :status)
-ORDER BY appearances DESC
-LIMIT :limit OFFSET :offset
 
 
 -- :name customer-search-count :query :1
@@ -78,5 +76,9 @@ WHERE (:search is null
 -- :doc Retrieves all customers.
 --      Generally a bad idea but there's little data here
 SELECT *
+,(CASE :ordering
+             WHEN 'desc' THEN (appearances * -1)
+             else appearances
+             END) as ordering
 FROM customer
-ORDER BY appearances DESC
+ORDER BY ordering asc;
