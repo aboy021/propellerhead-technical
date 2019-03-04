@@ -45,8 +45,12 @@ Since this is something I'm building on my own time I've opted to use:
 <a id="main-screen"></a>
 ### Main Screen
 
+![List view](./img/list-view.png?raw=true "List View")
+
 <a id="detail-screen"></a>
 ### Detail Screen
+
+![Detail view](./img/detail-view.png?raw=true "Detail View")
 
 <a id="running-the-app"></a>
 ## Running the app
