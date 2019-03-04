@@ -1,6 +1,6 @@
 # propellerhead-technical
 
-Simple Web application built for the Propellerhead Techinical Test.
+Simple Web application built for the Propellerhead Technical Test.
 
 <!-- MarkdownTOC  autolink="true" autoanchor="true" -->
 
@@ -137,4 +137,5 @@ complexity and time.
 ## License
 
 Copyright © 2019 Arthur Boyer
+
 Data provided by Marvel. © 2014 Marvel
