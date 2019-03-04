@@ -70,7 +70,7 @@ To start a web server for the application, run:
 
     lein run
 
-The open a web browser to [http://localhost:3000/](http://localhost:3000/)
+Then open a web browser to [http://localhost:3000/](http://localhost:3000/)
 
 
 <a id="some-code-highlights"></a>
@@ -121,7 +121,7 @@ I would have used.
 <a id="ajax"></a>
 ### AJAX
 
-Making the pages a little bit more responsive buy using ajax queries
+Making the pages a little bit more responsive by using ajax queries
 from client side javascript would have been good. A REST api with a 
 swagger front end, combined with clojure spec definitions for the 
 entities involved would have been nice.
