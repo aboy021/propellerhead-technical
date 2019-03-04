@@ -47,39 +47,42 @@
 
 (defn home-page [request]
   (let [page-num (request->page-num request)
-        search (get-in request [:query-params "search"])
-        status (request->status request)
+        search (or (get-in request [:query-params "search"]) "")
+        status (or (request->status request) "")
+        descending? (not= (get-in request [:query-params "order"]) "ascending")
         query {:search search
                :status status}
         offset (* (dec page-num) page-size)
         customers (db/customer-search query)
         num-customers (:freq (db/customer-search-count query))
         nav (navigation page-num num-customers)
-        descending? true
         sorted-customers (->> customers
                               (sort-by :appearances)
                               ((fn [col] (if descending? (reverse col) col))))
         paged-customers (->> sorted-customers
                              (drop offset)
                              (take page-size)
-                             (vec))]
-    (clojure.pprint/pprint (:query-params request))
-    (clojure.pprint/pprint paged-customers)
-    (layout/render request "home.html"
-                   {:docs                  (-> "docs/docs.md" io/resource slurp)
-                    :customers             paged-customers
-                    :nav                   nav
-                    :next-query-string     (-> request
-                                               (:query-params)
-                                               (assoc :page (:next nav))
-                                               (ring.util.codec/form-encode))
+                             (vec))
+        render-params {:docs                  (-> "docs/docs.md"
+                                                  io/resource
+                                                  slurp)
+                       :customers             paged-customers
+                       :nav                   nav
+                       :next-query-string     (-> request
+                                                  (:query-params)
+                                                  (assoc :page (:next nav))
+                                                  (ring.util.codec/form-encode))
 
-                    :previous-query-string (-> request
-                                               (:query-params)
-                                               (assoc :page (:next nav))
-                                               (ring.util.codec/form-encode))
-                    :search                search
-                    :status                (or status "")})))
+                       :previous-query-string (-> request
+                                                  (:query-params)
+                                                  (assoc :page (:next nav))
+                                                  (ring.util.codec/form-encode))
+                       :search                search
+                       :status                status
+                       :descending?            descending?}]
+    (clojure.pprint/pprint (:query-params request))
+    (clojure.pprint/pprint render-params)
+    (layout/render request "home.html" render-params)))
 
 (defn about-page [request]
   (layout/render request "about.html"))
