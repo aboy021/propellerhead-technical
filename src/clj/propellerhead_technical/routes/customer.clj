@@ -12,11 +12,15 @@
 (defn customer-page
   "Renders the customer details for the specified customer"
   [customer-id]
-  (let [id (util/parse-int customer-id)]
-    (layout/render {} "customer.html"
-                   {:customer           (db/get-customer {:customer-id id})
-                    :notes              (db/customer-notes {:customer-id id})
-                    :anti-forgery-token  (anti-forgery-field)})))
+  (let [id (util/parse-int customer-id)
+        customer (db/get-customer {:customer-id id})
+        notes (db/customer-notes {:customer-id id})]
+    (if customer
+      (layout/render {} "customer.html"
+                     {:customer           customer
+                      :notes              notes
+                      :anti-forgery-token (anti-forgery-field)})
+      (resp/redirect "error.html"))))
 
 (defn update-customer!
   "Updates the customer and creates any new notes"
